@@ -24,11 +24,16 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 app.get('/api/whoami', function (req, res) {
-  console.log(req);
+  console.log(req.headers['user-agent']);
+  /*console.log(req.navigator);
+  console.log(req.headers);
+  console.log(req.body);
+  console.log(req.url);
+  console.log(req.method);*/
   res.json({ 
     ipaddress:req.ip,
   language:req.headers["accept-language"] ,
-  software:"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0" });
+  software:req.headers['user-agent'] });
 });
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
